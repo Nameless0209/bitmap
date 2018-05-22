@@ -15,11 +15,11 @@ class Bitmap {
 
 private:
 
-	int colorRGB = 0;				// Для генерации нового цвета
-	vector<unsigned int> object;	// Найденные объекты
-	bitmap_image *image;			// Изображение
-	bitmap_image::rgb_t white;		// Белый цвет
-	bitmap_image::rgb_t colorPixel; // Цвет пикселя
+	int colorRGB = 0;				// Р”Р»СЏ РіРµРЅРµСЂР°С†РёРё РЅРѕРІРѕРіРѕ С†РІРµС‚Р°
+	vector<unsigned int> object;	// РќР°Р№РґРµРЅРЅС‹Рµ РѕР±СЉРµРєС‚С‹
+	bitmap_image *image;			// РР·РѕР±СЂР°Р¶РµРЅРёРµ
+	bitmap_image::rgb_t white;		// Р‘РµР»С‹Р№ С†РІРµС‚
+	bitmap_image::rgb_t colorPixel; // Р¦РІРµС‚ РїРёРєСЃРµР»СЏ
 
 public:
 
@@ -34,7 +34,7 @@ public:
 		colorPixel.red = 0;
 	};
 
-	/*		Загрузка изображения	*/
+	/*		Р—Р°РіСЂСѓР·РєР° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ	*/
 	bool loadImage(string path) {
 
 		image = new bitmap_image(path);
@@ -46,20 +46,20 @@ public:
 		}
 		return true;
 	}
-	/*		сохранение изображения		*/
+	/*		СЃРѕС…СЂР°РЅРµРЅРёРµ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ		*/
 	bool saveImage(string path) {
 
 		image->save_image(path);
 		return true;
 	}
 
-	/*	Сохранение площади объектов в Objects.txt файл	*/
+	/*	РЎРѕС…СЂР°РЅРµРЅРёРµ РїР»РѕС‰Р°РґРё РѕР±СЉРµРєС‚РѕРІ РІ Objects.txt С„Р°Р№Р»	*/
 	void getObject() {
 
 		ofstream file("Objects.txt");
 
-		file << setw(10) << "Номер объекта"
-			 << setw(20) << "Площадь объекта" << endl << endl;
+		file << setw(10) << "РќРѕРјРµСЂ РѕР±СЉРµРєС‚Р°"
+			 << setw(20) << "РџР»РѕС‰Р°РґСЊ РѕР±СЉРµРєС‚Р°" << endl << endl;
 
 		for (unsigned int i = 0; i < object.size(); i++) {
 
@@ -69,14 +69,14 @@ public:
 		file.close();
 	}
 
-	/*			Поиск объектов по ВЕРТИКАЛИ			*/
+	/*			РџРѕРёСЃРє РѕР±СЉРµРєС‚РѕРІ РїРѕ Р’Р•Р РўРРљРђР›Р			*/
 	void processing() {
 
 		unsigned int i = 0;
 		for (unsigned int x = 1; x < image->width() - 1; x++) {
 			for (unsigned int y = 1; y < image->height() - 1; y++) {
 
-				// Если текущий пиксель белого цвета, передаем его в функцию поиска  objectSearch()
+				// Р•СЃР»Рё С‚РµРєСѓС‰РёР№ РїРёРєСЃРµР»СЊ Р±РµР»РѕРіРѕ С†РІРµС‚Р°, РїРµСЂРµРґР°РµРј РµРіРѕ РІ С„СѓРЅРєС†РёСЋ РїРѕРёСЃРєР°  objectSearch()
 				if (image->get_pixel(x, y) == white) {
 
 					object.push_back(i);
@@ -87,33 +87,33 @@ public:
 			}
 		}
 	}
-	/*			Поиск частей  объекта			 */
+	/*			РџРѕРёСЃРє С‡Р°СЃС‚РµР№  РѕР±СЉРµРєС‚Р°			 */
 	void objectSearch(unsigned x, unsigned y) {
 
-		// Меняем цвет текущего пикселя, проверяем связи (4-связность)
+		// РњРµРЅСЏРµРј С†РІРµС‚ С‚РµРєСѓС‰РµРіРѕ РїРёРєСЃРµР»СЏ, РїСЂРѕРІРµСЂСЏРµРј СЃРІСЏР·Рё (4-СЃРІСЏР·РЅРѕСЃС‚СЊ)
 		image->set_pixel(x, y, colorPixel); 
 		bitmap_image::rgb_t pixel = image->get_pixel(x, y);
 		object[object.size() - 1] ++;
 
-		if (image->get_pixel(x - 1, y) == white) {	// Если пиксель слева белый
+		if (image->get_pixel(x - 1, y) == white) {	// Р•СЃР»Рё РїРёРєСЃРµР»СЊ СЃР»РµРІР° Р±РµР»С‹Р№
 
 			image->set_pixel(x - 1, y, pixel);
 			objectSearch(x - 1, y);
 
 		}
-		if (image->get_pixel(x + 1, y) == white) {	// Если пиксель справа белый
+		if (image->get_pixel(x + 1, y) == white) {	// Р•СЃР»Рё РїРёРєСЃРµР»СЊ СЃРїСЂР°РІР° Р±РµР»С‹Р№
 
 			image->set_pixel(x + 1, y, pixel);
 			objectSearch(x + 1, y);
 
 		}
-		if (image->get_pixel(x, y - 1) == white) {	// Если пиксель сверху белый
+		if (image->get_pixel(x, y - 1) == white) {	// Р•СЃР»Рё РїРёРєСЃРµР»СЊ СЃРІРµСЂС…Сѓ Р±РµР»С‹Р№
 
 			image->set_pixel(x, y - 1, pixel);
 			objectSearch(x, y - 1);
 
 		}
-		if (image->get_pixel(x, y + 1) == white) {	// Если пиксель снизу белый
+		if (image->get_pixel(x, y + 1) == white) {	// Р•СЃР»Рё РїРёРєСЃРµР»СЊ СЃРЅРёР·Сѓ Р±РµР»С‹Р№
 
 			image->set_pixel(x, y + 1, pixel);
 			objectSearch(x, y + 1);
@@ -121,7 +121,7 @@ public:
 		}
 	}
 
-	/*		Генерация нового цвета		*/
+	/*		Р“РµРЅРµСЂР°С†РёСЏ РЅРѕРІРѕРіРѕ С†РІРµС‚Р°		*/
 	void generationColor() {
 
 		random_device rd;
