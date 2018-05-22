@@ -1,0 +1,14 @@
+﻿  bitmap.cpp
+c:\users\dasha\desktop\bitmap2\bitmap\bitmap.h(135): warning C4244: =: преобразование "double" в "unsigned char", возможна потеря данных
+c:\users\dasha\desktop\bitmap2\bitmap\bitmap.h(139): warning C4244: =: преобразование "double" в "unsigned char", возможна потеря данных
+c:\users\dasha\desktop\bitmap2\bitmap\bitmap.h(142): warning C4244: =: преобразование "double" в "unsigned char", возможна потеря данных
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xutility(2483): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\xutility(2483): note:  см. объявление "std::copy::_Unchecked_iterators::_Deprecate"
+  c:\users\dasha\desktop\bitmap2\bitmap\bitmap_image.hpp(243): note: выполняется компиляция ссылки на экземпляр шаблон функции "_OutIt std::copy<const unsigned char*,unsigned char*>(_InIt,_InIt,_OutIt)"
+          with
+          [
+              _OutIt=unsigned char *,
+              _InIt=const unsigned char *
+          ]
+  bitmap.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  bitmap.vcxproj -> C:\Users\Dasha\Desktop\bitmap2\Debug\bitmap.exe
