@@ -1,5 +1,5 @@
-// bitmap.cpp: определяет точку входа для консольного приложения.
-//
+
+
 #include "BitMap.h"
 #include <string>
 
